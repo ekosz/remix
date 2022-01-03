@@ -62,6 +62,8 @@ export async function handleAsset(
   try {
     if (process.env.NODE_ENV === "development") {
       return await getAssetFromKV(event, {
+        ASSET_NAMESPACE: event.env?.__STATIC_CONTENT,
+        ASSET_MANIFEST: event.env?.__STATIC_CONTENT_MANIFEST,
         cacheControl: {
           bypassCache: true
         },
@@ -83,6 +85,8 @@ export async function handleAsset(
     }
 
     return await getAssetFromKV(event, {
+      ASSET_NAMESPACE: event.env?.__STATIC_CONTENT,
+      ASSET_MANIFEST: event.env?.__STATIC_CONTENT_MANIFEST,
       cacheControl,
       ...options
     });
